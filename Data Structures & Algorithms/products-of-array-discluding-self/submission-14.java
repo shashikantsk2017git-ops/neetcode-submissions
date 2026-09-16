@@ -1,0 +1,26 @@
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int[] pres = new int[nums.length];
+        int[] sres = new int[nums.length];
+        Arrays.fill(pres, 1);
+        Arrays.fill(sres, 1);
+
+        int ppref = 1;
+        for(int i = 1; i < nums.length; i++) {
+            ppref = ppref * nums[i-1];
+            pres[i] = ppref;
+        }
+
+        int psuf = 1;
+        for(int i = nums.length-2; i>=0; i--) {
+            psuf = psuf * nums[i+1];
+            sres[i] = psuf;
+        }
+
+        for(int i = 0; i < nums.length; i++) {
+            pres[i] = pres[i]*sres[i];
+        }
+
+        return pres;
+    }
+}  
