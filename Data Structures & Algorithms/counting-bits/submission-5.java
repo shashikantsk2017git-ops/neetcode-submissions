@@ -1,0 +1,28 @@
+class Solution {
+    public int[] countBits(int n) {
+        int[] res = new int[n+1];
+        for(int i = 1; i <= n; i++) {
+            //Last digit might be zeor or one but it may become by adding 1 in previous steps so
+            //remove that 1 and see how many 1's are there then add last bit of that number 
+            //and see total count
+            res[i] = res[i >> 1] + (i & 1);
+        }
+        return res;
+    }
+    public int[] countBits0(int n) {
+        int[] res = new int[n+1];
+        for(int i = 1; i <= n; i++) {
+            res[i] = hammingWeight(i);
+        }
+        return res;
+    }
+
+    public int hammingWeight(int n) {
+        int count = 0;
+        while(n != 0) {
+            if((n & 1) == 1) count++;
+            n = n >> 1;
+        }
+        return count;
+    }
+}
